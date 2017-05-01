@@ -8,6 +8,11 @@
         rank ranks]
     [suit rank]))
 
-(defn play-round [player1-card player2-card])
+; return vector with player who won and vector of won cards
+(defn play-round [p1-card p2-card]
+  (let [[p1-suit p1-rank] p1-card [p2-suit p2-rank] p2-card]
+    (if >
+      (.indexOf ranks p1-rank)
+      (.indexOf ranks p2-rank))))
 
-(defn play-game [player1-cards player2-cards])
+(defn play-game [p1-cards p2-cards])
