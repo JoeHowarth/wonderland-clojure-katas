@@ -24,4 +24,27 @@
 (def ex_p2 [:diamond 7])
 
 
-(defn play-game [p1-cards p2-cards])
+(defn play-game
+ ; used with shuffle-deck that returns a list of lists
+ ([deck] (let [[p1-cards p2-cards] deck]
+              (play-game p1-cards p2-cards)))
+ ;
+ ([p1-cards p2-cards]
+  (let [[winner cards](play-round
+                        (first p1-cards) (first p2-cards))]
+    (if (= winner 1)
+      (conj p1-cards cards)
+      (conj p2-cards cards))
+    (play-game p1-cards p2-cards))))
+
+(defn cart [colls]
+  (if (empty? colls)
+    '(())
+    (for [x (first colls)
+          more (cart (rest colls))]
+      (cons x more))))
+
+(defn shuffle-deck
+  ([] (shuffle-deck suits ranks))
+  ([suits ranks]
+   (partition 26 (shuffle (vec (cart [suits ranks]))))))
